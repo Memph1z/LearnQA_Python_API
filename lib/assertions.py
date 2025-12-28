@@ -20,3 +20,8 @@ class Assertions:
     def assert_cookie_value(response : Response, cookie_name, cookie_value, error_message):
         assert cookie_name in response.cookies, f"{cookie_name} not found in cookies"
         assert response.cookies[cookie_name] == cookie_value, error_message
+
+    @staticmethod
+    def assert_header_value(response: Response, header_name, header_value, error_message):
+        assert header_name in response.headers, f"{header_name} not found in response"
+        assert response.headers[header_name] == header_value, error_message

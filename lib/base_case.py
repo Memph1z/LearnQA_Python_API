@@ -22,3 +22,7 @@ class BaseCase:
     def print_cookies(self, response : Response):
         cookies_as_dict = dict(response.cookies)
         print(cookies_as_dict)
+
+    def print_headers(self, response : Response):
+        headers_as_dict = dict(response.headers)
+        print(headers_as_dict)
