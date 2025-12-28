@@ -1,6 +1,6 @@
 import requests
 
-passwords_file = "passwords.txt"
+passwords_file = "../passwords.txt"
 response_text = "You are NOT authorized"
 
 with open(passwords_file, 'r') as file:
