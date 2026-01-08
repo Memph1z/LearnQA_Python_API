@@ -13,6 +13,33 @@ class Assertions:
         assert response_as_dict[name] == expected_value, error_message
 
     @staticmethod
+    def assert_json_has_key(response : Response, name):
+        try:
+            response_as_dict = response.json()
+        except json.JSONDecodeError:
+            assert False, f"Response is not in JSON format. Response is '{response.text}'"
+
+        assert name in response_as_dict, f"Response does not contain '{name}'"
+
+    @staticmethod
+    def assert_json_has_keys(response : Response, names : list):
+        for name in names:
+            Assertions.assert_json_has_key(response, name)
+
+    @staticmethod
+    def assert_json_has_no_key(response: Response, name):
+        try:
+            response_as_dict = response.json()
+        except json.JSONDecodeError:
+            assert False, f"Response is not in JSON format. Response is '{response.text}'"
+
+        assert name not in response_as_dict, f"Response does contain '{name}', when it shouldn't"
+
+    @staticmethod
+    def assert_status_code(response : Response, status_code):
+        assert response.status_code == status_code, f"Response status code does not match '{status_code}'"
+
+    @staticmethod
     def assert_phrase_is_less_than_15_symbols(phrase, error_message):
         assert len(phrase) < 15, error_message
 

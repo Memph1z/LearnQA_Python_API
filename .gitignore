@@ -9,6 +9,9 @@ __pycache__/
 # Pytest
 .idea
 .pytest_cache
+logs/*
+test_results/
+allure_report/
 
 # Distribution / packaging
 .Python
