@@ -46,7 +46,7 @@ class TestUserRegister(BaseCase):
         response = MyRequests.post("/user", data = data)
         Assertions.assert_status_code(response, 400)
         assert response.content.decode(
-            "utf-8") == "The value of 'firstName' field is too long", f"Unexpected response content '{response.content}'"
+            "utf-8") == "The value of 'lastName' field is too long", f"Unexpected response content '{response.content}'"
 
     @pytest.mark.parametrize("condition", ["password", "username", "firstName", "lastName", "email"])
     def test_missing_data_fields(self, condition):
