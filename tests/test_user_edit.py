@@ -65,7 +65,7 @@ class TestUserEdit(BaseCase):
     def test_edit_user_with_irregular_email(self):
         self.email = '12345example.com'
 
-        response = MyRequests.put(f'/user/120065',
+        response = MyRequests.put(f'/user/{self.user_id}',
                                    cookies={'auth_sid': self.auth_sid},
                                    headers={'x-csrf-token': self.token},
                                    data={'email': self.email})
@@ -77,9 +77,9 @@ class TestUserEdit(BaseCase):
         # EDIT
         new_name = '1'
 
-        response = MyRequests.put(f'/user/120065',
+        response = MyRequests.put(f'/user/{self.user_id}',
                                    cookies={'auth_sid': self.auth_sid},
                                    headers={'x-csrf-token': self.token},
                                    data={'firstName': new_name})
         Assertions.assert_status_code(response, 400)
-        Assertions.assert_json_value_by_name(response, 'error', "The value for field `firstName` is too short", "Response does not match")
+        Assertions.assert_json_value_by_name(response, "error", "The value for field `firstName` is too short", "Response does not match")
