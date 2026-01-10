@@ -1,5 +1,7 @@
 import datetime
 import os
+
+import allure
 from requests import Response
 import threading
 
@@ -16,6 +18,7 @@ class Logger:
                 logger_file.write(data)
 
     @classmethod
+    @allure.step("Сохраняем запрос в лог")
     def add_request(cls, url: str, data: dict, headers: dict, cookies: dict, method: str):
         testname = os.environ.get('PYTEST_CURRENT_TEST')
 
@@ -31,6 +34,7 @@ class Logger:
         cls._write_log_to_file(data_to_add)
 
     @classmethod
+    @allure.step("Делаем ответ запрос")
     def add_response(cls, response: Response):
         cookies_as_dict = dict(response.cookies)
         headers_as_dict = dict(response.headers)

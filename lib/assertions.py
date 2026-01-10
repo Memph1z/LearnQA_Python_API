@@ -1,8 +1,10 @@
+import allure
 from requests import Response
 import json
 
 class Assertions:
     @staticmethod
+    @allure.step("Проверяем значение поля в ответе")
     def assert_json_value_by_name(response : Response, name, expected_value, error_message):
         try:
             response_as_dict = response.json()
@@ -13,6 +15,7 @@ class Assertions:
         assert response_as_dict[name] == expected_value, error_message
 
     @staticmethod
+    @allure.step("Проверяем, что в ответе содержится поле '{name}'")
     def assert_json_has_key(response : Response, name):
         try:
             response_as_dict = response.json()
@@ -27,6 +30,7 @@ class Assertions:
             Assertions.assert_json_has_key(response, name)
 
     @staticmethod
+    @allure.step("Проверяем, что в ответе отсутствует поле '{name}'")
     def assert_json_has_no_key(response: Response, name):
         try:
             response_as_dict = response.json()
@@ -41,6 +45,7 @@ class Assertions:
             Assertions.assert_json_has_no_key(response, name)
 
     @staticmethod
+    @allure.step("Проверяем, что код ответа соответствует '{status_code}'")
     def assert_status_code(response : Response, status_code):
         assert response.status_code == status_code, f"Response status code does not match '{status_code}'"
 
@@ -49,11 +54,13 @@ class Assertions:
         assert len(phrase) < 15, error_message
 
     @staticmethod
+    @allure.step("Проверяем, что cookie '{cookie_name}' имеет значение '{cookie_value}'")
     def assert_cookie_value(response : Response, cookie_name, cookie_value, error_message):
         assert cookie_name in response.cookies, f"{cookie_name} not found in cookies"
         assert response.cookies[cookie_name] == cookie_value, error_message
 
     @staticmethod
+    @allure.step("Проверяем, что заголовок '{header_name}' имеет значение '{header_value}'")
     def assert_header_value(response: Response, header_name, header_value, error_message):
         assert header_name in response.headers, f"{header_name} not found in response"
         assert response.headers[header_name] == header_value, error_message

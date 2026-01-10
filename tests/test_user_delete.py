@@ -1,3 +1,5 @@
+import allure
+
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 from lib.my_requests import MyRequests
@@ -61,9 +63,7 @@ class TestUserDelete(BaseCase):
         Assertions.assert_json_has_key(response1, 'id')
 
         email = register_data['email']
-        first_name = register_data['firstName']
         password = register_data['password']
-        user_id = self.get_json_value(response1, 'id')
 
         # AUTHORIZATION
         login_data = {

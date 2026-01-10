@@ -5,21 +5,25 @@ from environment import ENV_OBJECT
 
 class MyRequests():
     @staticmethod
+    @allure.step("Делаем GET запрос")
     def get(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         with allure.step(f"GET request with url: {url}"):
             return MyRequests._send(url, data, headers, cookies, 'GET')
 
     @staticmethod
+    @allure.step("Делаем POST запрос")
     def post(url : str, data : dict = None, headers : dict = None, cookies : dict = None):
         with allure.step(f"POST request with url: {url}"):
             return MyRequests._send(url, data, headers, cookies, 'POST')
 
     @staticmethod
+    @allure.step("Делаем DELETE запрос")
     def delete(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         with allure.step(f"DELETE request with url: {url}"):
             return MyRequests._send(url, data, headers, cookies, 'DELETE')
 
     @staticmethod
+    @allure.step("Делаем PUT запрос")
     def put(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         with allure.step(f"PUT request with url: {url}"):
             return MyRequests._send(url, data, headers, cookies, 'PUT')
